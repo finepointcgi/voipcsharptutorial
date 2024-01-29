@@ -1,0 +1,36 @@
+[gd_scene load_steps=4 format=3 uid="uid://d2c68kaxwx24s"]
+
+[ext_resource type="Script" path="res://Client.cs" id="1_f85fg"]
+[ext_resource type="PackedScene" uid="uid://ueafb18oq2kv" path="res://character.tscn" id="2_j0tcg"]
+[ext_resource type="Script" path="res://Server.cs" id="3_lkkmu"]
+
+[node name="Node" type="Node"]
+
+[node name="Client" type="Node" parent="."]
+script = ExtResource("1_f85fg")
+PlayerScene = ExtResource("2_j0tcg")
+SpawnLocation = NodePath("../PlayerSpawnLocation")
+
+[node name="Connect" type="Button" parent="Client"]
+offset_left = 67.0
+offset_top = 45.0
+offset_right = 229.0
+offset_bottom = 88.0
+text = "Connect"
+
+[node name="Server" type="Node" parent="."]
+script = ExtResource("3_lkkmu")
+PlayerScene = ExtResource("2_j0tcg")
+SpawnLocation = NodePath("../PlayerSpawnLocation")
+
+[node name="Host" type="Button" parent="Server"]
+offset_left = 952.0
+offset_top = 45.0
+offset_right = 1114.0
+offset_bottom = 88.0
+text = "Host"
+
+[node name="PlayerSpawnLocation" type="Node" parent="."]
+
+[connection signal="button_down" from="Client/Connect" to="Client" method="_on_connect_button_down"]
+[connection signal="button_down" from="Server/Host" to="Server" method="_on_host_button_down"]
